@@ -277,13 +277,17 @@ def main():
     print("=" * 62)
     print("千帆 API / DeepSeek 接入 全链路自检")
     print("=" * 62)
-    if not KEY:
+    if not KEY and not OFFLINE:
         print("\n缺少 QIANFAN_API_KEY 环境变量。\n"
               '  PowerShell: $env:QIANFAN_API_KEY="bce-v3/ALTAK-xxx/xxx"\n'
-              "  cmd:        set QIANFAN_API_KEY=bce-v3/ALTAK-xxx/xxx")
+              "  cmd:        set QIANFAN_API_KEY=bce-v3/ALTAK-xxx/xxx\n"
+              "只想检查本地文件？加 --offline 参数，跳过联网测试。")
         return 1
 
-    print(f"\nkey: {KEY[:12]}...{KEY[-6:]}   模式: {'离线' if OFFLINE else '联网'}")
+    if KEY:
+        print(f"\nkey: {KEY[:12]}...{KEY[-6:]}   模式: {'离线（忽略联网项）' if OFFLINE else '联网'}")
+    else:
+        print("\nkey: 未设置   模式: 离线")
 
     print("\n[本地检查]")
     for name, fn, net in TESTS:
