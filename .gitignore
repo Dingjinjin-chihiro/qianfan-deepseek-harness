@@ -1,0 +1,4 @@
+usage_ledger.jsonl
+.env
+*.pyc
+__pycache__/
